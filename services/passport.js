@@ -6,14 +6,12 @@ const ExtractJwt = require('passport-jwt').ExtractJwt;
 const LocalStrategy = require('passport-local');
 
 // Create local strategy
-
-// user name yerine email kullanıyoruz o yüzden emaili username e set ediyoruz
+// I wanted to use email instead of username.
 const localOptions = { usernameField: 'email', };
 const locallogin = new LocalStrategy(localOptions, function(email, password, done) {
     // Verity this email and password, call done with the user
     // if it is the correct email and password
     // othersiwe, call done with false
-
     User.findOne({ email: email }, function(err, user) {
         if (err)  { return done(err); }
         if (!user) { return done(null, false); }
